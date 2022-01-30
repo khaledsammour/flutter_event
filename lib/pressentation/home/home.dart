@@ -48,12 +48,7 @@ class HomeView extends StatelessWidget {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * .07,
                           child: _carName()),
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: AppMargin.m12),
-                        height: MediaQuery.of(context).size.height * .25,
-                        decoration: _carImage(),
-                      ),
+                      _carImage(),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * .01,
                       ),
@@ -101,6 +96,11 @@ class HomeView extends StatelessWidget {
                                   controller.isSelected
                                       ? controller.isSelected = false
                                       : controller.isSelected = true;
+                                  controller.index = controller.selected;
+                                  controller.conditionSelected =
+                                      controller.conditionSelectedRed;
+                                  controller.dateSelected =
+                                      controller.dateSelectedRed;
                                   controller.update();
                                 },
                                 child: Image.asset(AppStrings.filterMenu))
@@ -178,11 +178,19 @@ class HomeView extends StatelessWidget {
                               SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * .46,
-                                  child: Image.asset(AppStrings.bmw)),
+                                  child: Image.asset(controller.carName.entries
+                                      .toList()[controller.index]
+                                      .value
+                                      .elementAt(2)
+                                      .toString())),
                               SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * .46,
-                                  child: Image.asset(AppStrings.bmw)),
+                                  child: Image.asset(controller.carName.entries
+                                      .toList()[controller.index]
+                                      .value
+                                      .elementAt(2)
+                                      .toString())),
                             ],
                           ),
                         ),
@@ -220,7 +228,7 @@ class HomeView extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            controller.conditionSelected = 0;
+                            controller.conditionSelectedRed = 0;
                             controller.update();
                           },
                           child: SizedBox(
@@ -234,7 +242,7 @@ class HomeView extends StatelessWidget {
                                       color: ColorManager.black,
                                       fontSize: FontSize.s16),
                                 ),
-                                controller.conditionSelected == 0
+                                controller.conditionSelectedRed == 0
                                     ? Container(
                                         height: 3,
                                         width:
@@ -251,7 +259,7 @@ class HomeView extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            controller.conditionSelected = 1;
+                            controller.conditionSelectedRed = 1;
                             controller.update();
                           },
                           child: SizedBox(
@@ -265,7 +273,7 @@ class HomeView extends StatelessWidget {
                                       color: ColorManager.black,
                                       fontSize: FontSize.s18),
                                 ),
-                                controller.conditionSelected == 1
+                                controller.conditionSelectedRed == 1
                                     ? Container(
                                         height: 3,
                                         width:
@@ -300,10 +308,11 @@ class HomeView extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (controller.dateSelected == 0) {
+                    if (controller.dateSelectedRed == 0) {
                       return;
                     } else {
-                      controller.dateSelected = controller.dateSelected - 1;
+                      controller.dateSelectedRed =
+                          controller.dateSelectedRed - 1;
                       controller.update();
                     }
                   },
@@ -337,7 +346,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s16),
                               ),
-                              controller.dateSelected == 0
+                              controller.dateSelectedRed == 0
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -361,7 +370,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s16),
                               ),
-                              controller.dateSelected == 1
+                              controller.dateSelectedRed == 1
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -385,7 +394,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s16),
                               ),
-                              controller.dateSelected == 2
+                              controller.dateSelectedRed == 2
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -404,10 +413,11 @@ class HomeView extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (controller.dateSelected == 2) {
+                    if (controller.dateSelectedRed == 2) {
                       return;
                     } else {
-                      controller.dateSelected = controller.dateSelected + 1;
+                      controller.dateSelectedRed =
+                          controller.dateSelectedRed + 1;
                       controller.update();
                     }
                   },
@@ -435,10 +445,10 @@ class HomeView extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (controller.index == 0) {
+                    if (controller.selected == 0) {
                       return;
                     } else {
-                      controller.index = controller.index - 1;
+                      controller.selected = controller.selected - 1;
                       controller.update();
                     }
                   },
@@ -472,7 +482,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s18),
                               ),
-                              controller.index == 3
+                              controller.selected == 3
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -496,7 +506,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s18),
                               ),
-                              controller.index == 4
+                              controller.selected == 4
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -520,7 +530,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s14),
                               ),
-                              controller.index == 5
+                              controller.selected == 5
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -539,10 +549,10 @@ class HomeView extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (controller.index == 5) {
+                    if (controller.selected == 5) {
                       return;
                     } else {
-                      controller.index = controller.index + 1;
+                      controller.selected = controller.selected + 1;
                       controller.update();
                     }
                   },
@@ -570,10 +580,10 @@ class HomeView extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (controller.index == 0) {
+                    if (controller.selected == 0) {
                       return;
                     } else {
-                      controller.index = controller.index - 1;
+                      controller.selected = controller.selected - 1;
                       controller.update();
                     }
                   },
@@ -607,7 +617,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s18),
                               ),
-                              controller.index == 0
+                              controller.selected == 0
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -631,7 +641,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s18),
                               ),
-                              controller.index == 1
+                              controller.selected == 1
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -655,7 +665,7 @@ class HomeView extends StatelessWidget {
                                     color: ColorManager.black,
                                     fontSize: FontSize.s18),
                               ),
-                              controller.index == 2
+                              controller.selected == 2
                                   ? Container(
                                       height: 3,
                                       width: MediaQuery.of(context).size.width *
@@ -674,10 +684,10 @@ class HomeView extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (controller.index == 5) {
+                    if (controller.selected == 5) {
                       return;
                     } else {
-                      controller.index = controller.index + 1;
+                      controller.selected = controller.selected + 1;
                       controller.update();
                     }
                   },
@@ -811,178 +821,214 @@ class HomeView extends StatelessWidget {
   }
 
   _buttons() {
-    return Row(
-      children: [
-        SizedBox(
-          width: 70,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GetBuilder<HomeViewModel>(
+        init: HomeViewModel(),
+        builder: (controller) {
+          return Row(
             children: [
-              GestureDetector(
-                onTap: () {
-                  print("Compare is pressed");
-                },
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.red,
-                  ),
-                  child: Center(
-                    child: Text(
-                      "  ؟\nCompare",
-                      style: getBoldStyle(color: ColorManager.black),
+              SizedBox(
+                width: 70,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.snackbar("tapped", "Compare is pressed");
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.red,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "  ؟\nCompare",
+                            style: getBoldStyle(color: ColorManager.black),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.snackbar("tapped", "Call is pressed");
+                      },
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: ColorManager.blue,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Call",
+                            style: getBoldStyle(
+                                color: ColorManager.whiteWithOpecity1,
+                                fontSize: FontSize.s20),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.snackbar("tapped", "Report is pressed");
+                      },
+                      child: Container(
+                        height: 25,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: ColorManager.grey,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Report !",
+                            style: getBoldStyle(
+                                color: ColorManager.whiteWithOpecity1,
+                                fontSize: FontSize.s14),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  print("Call is pressed");
-                },
-                child: Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: ColorManager.blue,
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Call",
-                      style: getBoldStyle(
-                          color: ColorManager.whiteWithOpecity1,
-                          fontSize: FontSize.s20),
-                    ),
-                  ),
-                ),
+              const SizedBox(
+                width: 5,
               ),
-              GestureDetector(
-                onTap: () {
-                  print("Report is pressed");
-                },
-                child: Container(
-                  height: 25,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: ColorManager.grey,
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Report !",
-                      style: getBoldStyle(
-                          color: ColorManager.whiteWithOpecity1,
-                          fontSize: FontSize.s14),
+              SizedBox(
+                width: 80,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        controller.like = controller.like + 1;
+                        controller.update();
+                      },
+                      child: Container(
+                        height: 25,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: ColorManager.red,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Like",
+                            style: getBoldStyle(
+                                color: ColorManager.whiteWithOpecity1,
+                                fontSize: FontSize.s20),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.dislike = controller.dislike + 1;
+                        controller.update();
+                      },
+                      child: Container(
+                        height: 25,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: ColorManager.red,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Dislike",
+                            style: getBoldStyle(
+                                color: ColorManager.whiteWithOpecity1,
+                                fontSize: FontSize.s16),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.snackbar("tapped", "Request for advice is pressed");
+                      },
+                      child: Container(
+                        height: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.red,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                "?",
+                                style: getBoldStyle(
+                                    color: ColorManager.whiteWithOpecity1,
+                                    fontSize: FontSize.s25),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                "Request\nfor advice",
+                                style: getBoldStyle(
+                                    color: ColorManager.whiteWithOpecity1,
+                                    fontSize: FontSize.s14),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
-          ),
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-        SizedBox(
-          width: 80,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: 25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: ColorManager.red,
-                ),
-                child: Center(
-                  child: Text(
-                    "Like",
-                    style: getBoldStyle(
-                        color: ColorManager.whiteWithOpecity1,
-                        fontSize: FontSize.s20),
-                  ),
-                ),
-              ),
-              Container(
-                height: 25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: ColorManager.red,
-                ),
-                child: Center(
-                  child: Text(
-                    "Dislike",
-                    style: getBoldStyle(
-                        color: ColorManager.whiteWithOpecity1,
-                        fontSize: FontSize.s16),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  print("Request for advice is pressed");
-                },
-                child: Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.red,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          "?",
-                          style: getBoldStyle(
-                              color: ColorManager.whiteWithOpecity1,
-                              fontSize: FontSize.s25),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          "Request\nfor advice",
-                          style: getBoldStyle(
-                              color: ColorManager.whiteWithOpecity1,
-                              fontSize: FontSize.s14),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+          );
+        });
   }
 
   _numberOfLike() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          "1000",
-          style:
-              getNormalStyle(color: ColorManager.grey, fontSize: FontSize.s14),
-        ),
-        Text(
-          "1000",
-          style:
-              getNormalStyle(color: ColorManager.grey, fontSize: FontSize.s14),
-        ),
-      ],
-    );
+    return GetBuilder<HomeViewModel>(
+        init: HomeViewModel(),
+        builder: (controller) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                controller.like.toString(),
+                style: getNormalStyle(
+                    color: ColorManager.grey, fontSize: FontSize.s14),
+              ),
+              Text(
+                controller.dislike.toString(),
+                style: getNormalStyle(
+                    color: ColorManager.grey, fontSize: FontSize.s14),
+              ),
+            ],
+          );
+        });
   }
 
   _carImage() {
-    return BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.black,
-        image: const DecorationImage(
-            image: AssetImage(AppStrings.bmw), fit: BoxFit.fill));
+    return GetBuilder<HomeViewModel>(
+        init: HomeViewModel(),
+        builder: (controller) {
+          return Builder(builder: (context) {
+            return Container(
+                margin: const EdgeInsets.symmetric(horizontal: AppMargin.m12),
+                height: MediaQuery.of(context).size.height * .25,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black,
+                    image: DecorationImage(
+                        image: AssetImage(controller.carName.entries
+                            .toList()[controller.index]
+                            .value
+                            .elementAt(2)
+                            .toString()),
+                        fit: BoxFit.fill)));
+          });
+        });
   }
 
   _carName() {
