@@ -229,6 +229,11 @@ class HomeView extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             controller.conditionSelectedRed = 0;
+                            controller.index = controller.selected;
+                            controller.conditionSelected =
+                                controller.conditionSelectedRed;
+                            controller.dateSelected =
+                                controller.dateSelectedRed;
                             controller.update();
                           },
                           child: SizedBox(
@@ -260,6 +265,11 @@ class HomeView extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             controller.conditionSelectedRed = 1;
+                            controller.index = controller.selected;
+                            controller.conditionSelected =
+                                controller.conditionSelectedRed;
+                            controller.dateSelected =
+                                controller.dateSelectedRed;
                             controller.update();
                           },
                           child: SizedBox(
